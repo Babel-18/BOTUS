@@ -103,6 +103,7 @@ client.on(Events.InteractionCreate, async interaction =>{
         interaction.reply('Breetings!');
     };
     if (interaction.commandName ==='genius') {
+        
         interaction.reply(`${interaction.user.username}, you're a genius, and you worked so hard on this!`);
     };
     if (interaction.commandName ==='windwhistle') {
@@ -126,8 +127,8 @@ client.on(Events.InteractionCreate, async interaction =>{
 
 client.on('messageCreate',(message)=>{
     console.log(message.content);
-    const filter = (reaction, user) => reaction.emoji.name === '🅱️';
-    const collector = message.createReactionCollector({ filter, max:1, time: 60_000, errors: ['time']  });
+    const b_filter = (reaction, user) => reaction.emoji.name === '🅱️';
+    const collector = message.createReactionCollector({ b_filter, max:1, time: 60_000, errors: ['time']  });
     collector.on('collect', r =>{
     string_to_bresify = message.content;
     temp_array = string_to_bresify.split(" ");
@@ -156,5 +157,18 @@ client.on('messageCreate',(message)=>{
     collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 
 });
+client.on('messageCreate',(message)=>{
+    console.log(message.content);
+    const genius_filter = (reaction, user) => reaction.emoji.name === '🤎';
+    const collector = message.createReactionCollector({ genius_filter, max:1, time: 60_000, errors: ['time']  });
+    message.reply(`${message.user.username}, you're a genius, and you worked so hard on this!`);
 
+
+    b_reply = temp_array.join(" ");
+    // console.log(string_to_bresify);
+    message.reply(b_reply);
+    });
+    collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+
+});
 client.login(process.env.TOKEN);

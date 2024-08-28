@@ -162,11 +162,6 @@ client.on('messageCreate',(message)=>{
     const genius_filter = (reaction, user) => reaction.emoji.name === '🤎';
     const collector = message.createReactionCollector({ genius_filter, max:1, time: 60_000, errors: ['time']  });
     message.reply(`${message.user.username}, you're a genius, and you worked so hard on this!`);
-
-
-    b_reply = temp_array.join(" ");
-    // console.log(string_to_bresify);
-    message.reply(b_reply);
     });
     collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 

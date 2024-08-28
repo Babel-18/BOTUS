@@ -157,6 +157,7 @@ client.on("messageCreate", (message) => {
     console.log(`Collected ${collected.size} items`)
   );
 });
+<<<<<<< HEAD
 client.on("messageCreate", (message) => {
   console.log(message.content);
   const genius_filter = (reaction, user) => reaction.emoji.name === "🤎";
@@ -172,5 +173,14 @@ client.on("messageCreate", (message) => {
   collector.on("end", (collected) =>
     console.log(`Collected ${collected.size} items`)
   );
+=======
+client.on('messageCreate',(message)=>{
+    console.log(message.content);
+    const genius_filter = (reaction, user) => reaction.emoji.name === '🤎';
+    const collector = message.createReactionCollector({ genius_filter, max:1, time: 60_000, errors: ['time']  });
+    message.reply(`${message.member.displayName}, you're a genius, and you worked so hard on this!`);
+    collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+
+>>>>>>> main
 });
 client.login(process.env.TOKEN);

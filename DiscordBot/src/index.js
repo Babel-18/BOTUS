@@ -167,10 +167,11 @@ client.on("messageCreate", (message) => {
     errors: ["time"],
   });
   message.reply(
-    `${message.member.displayName}, you're a genius, and you worked so hard on this!`
+    `${message.member.displayName}, you're a genius, and you worked so hard on this!`,
+    collector.on("end", (collected) =>
+      console.log(`Collected ${collected.size} items`)
+    )
   );
-  collector.on("end", (collected) =>
-    console.log(`Collected ${collected.size} items`)
-  );
+
 });
 client.login(process.env.TOKEN);

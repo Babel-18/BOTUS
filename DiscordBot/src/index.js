@@ -158,7 +158,6 @@ client.on("messageCreate", (message) => {
 });
 
 client.on("messageCreate", (message) => {
-  console.log(message.content);
   const filter = (reaction, user) => reaction.emoji.name === "🧠";
   const collector = message.createReactionCollector({
     filter,

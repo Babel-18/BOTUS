@@ -168,7 +168,7 @@ client.on("messageCreate", (message) => {
 
   collector.on("collect", (b) => {
     if (message.author.id == "276121513412001792") {
-      message.reply(`Mom, congradulating yourself is embarassing.`);
+      message.reply(`Mom, congratulating yourself is embarassing.`);
     } else {
       message.reply(
         `${message.author}, you're a genius, and you worked so hard on this!`

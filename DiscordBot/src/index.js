@@ -126,14 +126,15 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 client.on("messageCreate", (message) => {
   console.log(message.content);
-  const b_filter = (reaction, user) => reaction.emoji.name === "🅱️";
+  const filter = (reaction, user) => reaction.emoji.name === "🅱️";
   const collector = message.createReactionCollector({
-    b_filter,
+    filter,
     max: 1,
     time: 60_000,
     errors: ["time"],
   });
-  collector.on("collect", (r) => {
+
+  collector.on("collect", (b) => {
     string_to_bresify = message.content;
     temp_array = string_to_bresify.split(" ");
     let bresified_array = [];
@@ -145,33 +146,35 @@ client.on("messageCreate", (message) => {
         } else {
           temp_array[i] = temp_array[i].replace(/^./, "b");
         }
-        // bresified_array.push(word_to_bres);
       }
     }
-
     b_reply = temp_array.join(" ");
-    // console.log(string_to_bresify);
     message.reply(b_reply);
+    console.log(`Collected ${b.emoji.name}`);
   });
   collector.on("end", (collected) =>
     console.log(`Collected ${collected.size} items`)
   );
 });
+
 client.on("messageCreate", (message) => {
-  console.log(message.content);
-  const genius_filter = (reaction, user) => reaction.emoji.name === "🤎";
+  const filter = (reaction, user) => reaction.emoji.name === "🧠";
   const collector = message.createReactionCollector({
-    genius_filter,
+    filter,
     max: 1,
-    time: 6_000,
+    time: 60_000,
     errors: ["time"],
   });
-  message.reply(
-    `${message.member.displayName}, you're a genius, and you worked so hard on this!`,
-    collector.on("end", (collected) =>
-      console.log(`Collected ${collected.size} items`)
-    )
+
+  collector.on("collect", (b) => {
+    message.reply(
+      `${message.author}, you're a genius, and you worked so hard on this!`
+    );
+  });
+  collector.on("end", (collected) =>
+    console.log(`Collected ${collected.size} items`)
   );
 
 });
+
 client.login(process.env.TOKEN);

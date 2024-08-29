@@ -99,15 +99,6 @@ client.once(Events.ClientReady, (readyClient) => {
 
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
-
-  if (interaction.commandName === "breetings") {
-    interaction.reply("Breetings!");
-  }
-  if (interaction.commandName === "genius") {
-    interaction.reply(
-      `${interaction.user.username}, you're a genius, and you worked so hard on this!`
-    );
-  }
   if (interaction.commandName === "windwhistle") {
     interaction.reply(windwhistle);
   }
@@ -178,7 +169,6 @@ client.on("messageCreate", (message) => {
   collector.on("end", (collected) =>
     console.log(`Collected ${collected.size} items`)
   );
-
 });
 
 client.login(process.env.TOKEN);

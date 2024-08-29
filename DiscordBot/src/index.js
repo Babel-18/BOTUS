@@ -167,9 +167,13 @@ client.on("messageCreate", (message) => {
   });
 
   collector.on("collect", (b) => {
-    message.reply(
-      `${message.author}, you're a genius, and you worked so hard on this!`
-    );
+    if (message.author.id == "276121513412001792") {
+      message.reply(`Mom, congradulating yourself is embarassing.`);
+    } else {
+      message.reply(
+        `${message.author}, you're a genius, and you worked so hard on this!`
+      );
+    }
   });
   collector.on("end", (collected) =>
     console.log(`Collected ${collected.size} items`)

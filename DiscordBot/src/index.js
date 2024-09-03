@@ -133,6 +133,29 @@ client.on(Events.MessageReactionAdd, async (reaction, user) => {
   console.log(
     `${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`
   );
+  if (reaction.emoji.name === "🧠") {
+    reaction.message.reply(
+      `${reaction.message.author}, you're a genius, and you worked so hard on this!`
+    );
+  }
+  if (reaction.emoji.name === "🅱️") {
+    string_to_bresify = reaction.message.content;
+    temp_array = string_to_bresify.split(" ");
+    let bresified_array = [];
+    for (let i = temp_array.length - 1; i >= 0; i--) {
+      if (conjunctions.includes(temp_array[i])) {
+      } else {
+        if (temp_array[i].match(/^[aeiou]/)) {
+          temp_array[i] = temp_array[i].replace(/^/, "b");
+        } else {
+          temp_array[i] = temp_array[i].replace(/^./, "b");
+        }
+      }
+    }
+    b_reply = temp_array.join(" ");
+    reaction.message.reply(b_reply);
+  }
+
   // The reaction is now also fully available and the properties will be reflected accurately:
   console.log(
     `${reaction.count} user(s) have given the same reaction to this message!`

@@ -6,6 +6,7 @@ const {
   User,
   Message,
   messageLink,
+  Partials,
 } = require("discord.js");
 
 const client = new Client({
@@ -16,6 +17,7 @@ const client = new Client({
     IntentsBitField.Flags.MessageContent,
     IntentsBitField.Flags.GuildMessageReactions,
   ],
+  partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 const windwhistle =
   "In Tekken 8 there will be a new character named Windwhistle. He practices an MMA style fusion of BJJ and Mystical Tai Chi. He is 38 years old. He has a sexy skinny twunky body. He has defined very thin and abdomen. He has sexy muscular collar bone. He has a tight waist. His calves are defined but not huge. His nipples are a subtle dark apricot hue. His nipples are small and turn erect on final round. He was born in Cuba but he grew up in southern China. In his adulthood, he travelled to Northern Alberta to work in the tar sands. His areolas is large relative to other male characters. His skin is a lightly bronzed color. On his left forearm there is a tattoo of a sheep. On his right forearm there is a tattoo of a wolf. His cheekbones are very defined. His jaw is very defined. He has deep eye sockets in a sexy way. His eyes are beautiful. His eyes are shining. His left eye is a bloody burgundy hue. His right eye is a deep sea indigo hue. His hair goes down to his neck. His hair is dark and curly. His hair has a lime green streak that goes down the front. He is clean shaven. He loves techno music. He loves EDM music. He loves DNB music. He loves experimental drugs. He goes into full power fury mode after taking experimental drugs. His breasts are large and tender. His breasts are large enough to be firmly grabbed by other human adult males. His cock is 3 long flaccid. His cock is 7 long erect. His cock has a 3 girth flaccid. His cock has a 4 girth erect. His balls are average sized. His balls sag slightly in an alluring way. His ass is large and firm. His ass is spanked and red. He loves for his big ass to be spanked red. He wears black bootleg timberlands. He wears tall black socks that go up to his knees. He wears black cargo shorts that are tight and accentuate his big assss.";
@@ -113,6 +115,28 @@ client.on(Events.InteractionCreate, async (interaction) => {
     final_string = choosen_bres.replaceAll(/[A-Z]/g, "B");
     interaction.reply(final_string);
   }
+});
+
+client.on(Events.MessageReactionAdd, async (reaction, user) => {
+  // When a reaction is received, check if the structure is partial
+  if (reaction.partial) {
+    // If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
+    try {
+      await reaction.fetch();
+    } catch (error) {
+      console.error("Something went wrong when fetching the message:", error);
+      // Return as `reaction.message.author` may be undefined/null
+      return;
+    }
+  }
+  // Now the message has been cached and is fully available
+  console.log(
+    `${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`
+  );
+  // The reaction is now also fully available and the properties will be reflected accurately:
+  console.log(
+    `${reaction.count} user(s) have given the same reaction to this message!`
+  );
 });
 
 client.on("messageCreate", (message) => {

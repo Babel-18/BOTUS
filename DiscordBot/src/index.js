@@ -134,12 +134,14 @@ client.on(Events.MessageReactionAdd, async (reaction, user) => {
     `${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`
   );
   if (reaction.emoji.name === "🧠") {
-    if (reaction.author.id == "276121513412001792") {
+    if (reaction.message.author.id == "276121513412001792") {
       reaction.message.reply(
         `Mom, you're a genius, and you worked so hard on this.`
       );
     } else {
-      `${reaction.message.author}, you're a genius, and you worked so hard on this!`;
+      reaction.message.reply(
+        `${reaction.message.author}, you're a genius, and you worked so hard on this!`
+      );
     }
   }
 

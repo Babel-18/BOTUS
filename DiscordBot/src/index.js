@@ -134,7 +134,9 @@ client.on(Events.MessageReactionAdd, async (reaction, user) => {
     `${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`
   );
   if (reaction.emoji.name === "🧠") {
-    reaction.message.reply(
+    if (reaction.author.id == "276121513412001792") {
+      reaction.message.reply(`Mom, you're a genius, and you worked so hard on this.`);
+    } else {
       `${reaction.message.author}, you're a genius, and you worked so hard on this!`
     );
   }
@@ -162,60 +164,60 @@ client.on(Events.MessageReactionAdd, async (reaction, user) => {
   );
 });
 
-client.on("messageCreate", (message) => {
-  console.log(message.content);
-  const filter = (reaction, user) => reaction.emoji.name === "🅱️";
-  const collector = message.createReactionCollector({
-    filter,
-    max: 1,
-    time: 60_000,
-    errors: ["time"],
-  });
-
-  collector.on("collect", (b) => {
-    string_to_bresify = message.content;
-    temp_array = string_to_bresify.split(" ");
-    let bresified_array = [];
-    for (let i = temp_array.length - 1; i >= 0; i--) {
-      if (conjunctions.includes(temp_array[i])) {
-      } else {
-        if (temp_array[i].match(/^[aeiou]/)) {
-          temp_array[i] = temp_array[i].replace(/^/, "b");
-        } else {
-          temp_array[i] = temp_array[i].replace(/^./, "b");
-        }
-      }
-    }
-    b_reply = temp_array.join(" ");
-    message.reply(b_reply);
-    console.log(`Collected ${b.emoji.name}`);
-  });
-  collector.on("end", (collected) =>
-    console.log(`Collected ${collected.size} items`)
-  );
-});
-
-client.on("messageCreate", (message) => {
-  const filter = (reaction, user) => reaction.emoji.name === "🧠";
-  const collector = message.createReactionCollector({
-    filter,
-    max: 1,
-    time: 60_000,
-    errors: ["time"],
-  });
-
-  collector.on("collect", (b) => {
-    if (message.author.id == "276121513412001792") {
-      message.reply(`Mom, you're a genius, and you worked so hard on this.`);
-    } else {
-      message.reply(
-        `${message.author}, you're a genius, and you worked so hard on this!`
-      );
-    }
-  });
-  collector.on("end", (collected) =>
-    console.log(`Collected ${collected.size} items`)
-  );
-});
+// client.on("messageCreate", (message) => {
+//   console.log(message.content);
+//   const filter = (reaction, user) => reaction.emoji.name === "🅱️";
+//   const collector = message.createReactionCollector({
+//     filter,
+//     max: 1,
+//     time: 60_000,
+//     errors: ["time"],
+//   });
+// 
+//   collector.on("collect", (b) => {
+//     string_to_bresify = message.content;
+//     temp_array = string_to_bresify.split(" ");
+//     let bresified_array = [];
+//     for (let i = temp_array.length - 1; i >= 0; i--) {
+//       if (conjunctions.includes(temp_array[i])) {
+//       } else {
+//         if (temp_array[i].match(/^[aeiou]/)) {
+//           temp_array[i] = temp_array[i].replace(/^/, "b");
+//         } else {
+//           temp_array[i] = temp_array[i].replace(/^./, "b");
+//         }
+//       }
+//     }
+//     b_reply = temp_array.join(" ");
+//     message.reply(b_reply);
+//     console.log(`Collected ${b.emoji.name}`);
+//   });
+//   collector.on("end", (collected) =>
+//     console.log(`Collected ${collected.size} items`)
+//   );
+// });
+// 
+// client.on("messageCreate", (message) => {
+//   const filter = (reaction, user) => reaction.emoji.name === "🧠";
+//   const collector = message.createReactionCollector({
+//     filter,
+//     max: 1,
+//     time: 60_000,
+//     errors: ["time"],
+//   });
+// 
+//   collector.on("collect", (b) => {
+//     if (message.author.id == "276121513412001792") {
+//       message.reply(`Mom, you're a genius, and you worked so hard on this.`);
+//     } else {
+//       message.reply(
+//         `${message.author}, you're a genius, and you worked so hard on this!`
+//       );
+//     }
+//   });
+//   collector.on("end", (collected) =>
+//     console.log(`Collected ${collected.size} items`)
+//   );
+// });
 
 client.login(process.env.TOKEN);

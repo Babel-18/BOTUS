@@ -135,11 +135,14 @@ client.on(Events.MessageReactionAdd, async (reaction, user) => {
   );
   if (reaction.emoji.name === "🧠") {
     if (reaction.author.id == "276121513412001792") {
-      reaction.message.reply(`Mom, you're a genius, and you worked so hard on this.`);
+      reaction.message.reply(
+        `Mom, you're a genius, and you worked so hard on this.`
+      );
     } else {
-      `${reaction.message.author}, you're a genius, and you worked so hard on this!`
-    );
+      `${reaction.message.author}, you're a genius, and you worked so hard on this!`;
+    }
   }
+
   if (reaction.emoji.name === "🅱️") {
     string_to_bresify = reaction.message.content;
     temp_array = string_to_bresify.split(" ");
@@ -173,7 +176,7 @@ client.on(Events.MessageReactionAdd, async (reaction, user) => {
 //     time: 60_000,
 //     errors: ["time"],
 //   });
-// 
+//
 //   collector.on("collect", (b) => {
 //     string_to_bresify = message.content;
 //     temp_array = string_to_bresify.split(" ");
@@ -196,7 +199,7 @@ client.on(Events.MessageReactionAdd, async (reaction, user) => {
 //     console.log(`Collected ${collected.size} items`)
 //   );
 // });
-// 
+//
 // client.on("messageCreate", (message) => {
 //   const filter = (reaction, user) => reaction.emoji.name === "🧠";
 //   const collector = message.createReactionCollector({
@@ -205,7 +208,7 @@ client.on(Events.MessageReactionAdd, async (reaction, user) => {
 //     time: 60_000,
 //     errors: ["time"],
 //   });
-// 
+//
 //   collector.on("collect", (b) => {
 //     if (message.author.id == "276121513412001792") {
 //       message.reply(`Mom, you're a genius, and you worked so hard on this.`);
